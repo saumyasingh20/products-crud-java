@@ -1,7 +1,9 @@
 package Product;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import static Product.Product.getInformation;
 import static Product.ProductMgmt.*;
 
 public class test {
@@ -16,7 +18,8 @@ public class test {
             System.out.println("2. List Products");
             System.out.println("3. Delete Products");
             System.out.println("4. Update Product");
-            System.out.println("5. exit ");
+            System.out.println("5. Find Products by Manufacturer");
+            System.out.println("6. Exit ");
             ch = scan.nextInt();
             switch (ch) {
                 case 1: {
@@ -50,12 +53,30 @@ public class test {
                     }
                     break;
                 }
-                case 5: System.exit(0);
+                case 5:{
+                    System.out.println("Enter the name of the manufacturer ");
+                    String manu = scan.next();
+                    ArrayList<Product> res = findProductsByManufacturer(manu);
+                    if(res.size()==0){
+                        System.out.println("No Products made by  "+manu+ " manufacturer found in the list");
+                    }else{
+                        for (Product prod : res){
+                             getInformation(prod);
+                        }
+                    }
+                    break;
+
+                }
+                case 6: {
+                         System.exit(0);
+                         break;
+                        }
+
                 default:
                     System.out.println("invalid choice");
                     ;
             }
-        }while (ch!=5);
+        }while (ch!=6);
 
     }
 }

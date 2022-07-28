@@ -12,6 +12,10 @@ public class ProductMgmt {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter product code");
         int prodCode = scan.nextInt();
+        if(findProduct(prodCode)){
+            System.out.println("Duplicate product code found. Product Code should be unique");
+            return;
+        }
         System.out.println("Enter product name");
         String prodName = scan.next();
         System.out.println("Enter product description");
@@ -26,7 +30,7 @@ public class ProductMgmt {
     }
     public static void addProduct(Product prod){
         products.add(prod);
-        System.out.println("added");
+        System.out.println("******* Product Added to the List ******* ");
     }
     public static void listProducts(){
         if(products.size()==0){
@@ -51,6 +55,17 @@ public class ProductMgmt {
         }
         return isFound;
     }
+
+    public static ArrayList<Product> findProductsByManufacturer(String manu){
+        ArrayList<Product> res = new ArrayList<>();
+        for(Product prod:products){
+            if(prod.getManufacturer().equals(manu)){
+                res.add(prod);
+            }
+        }
+        return res;
+
+    }
     public static void updateProduct(int code){
         System.out.println("Enter the product property which you want to update . Choose index: ");
         System.out.println("1. Product Name");
@@ -65,8 +80,8 @@ public class ProductMgmt {
                 String newName = scan.next();
                 for(Product prod:products){
                     if(prod.code==code){
-                        prod.name=newName;
-                        System.out.println("Product Updated");
+                        prod.setName(newName);
+                        System.out.println(" ******* Product Updated *******");
                         getInformation(prod);
                         return;
                     }
@@ -78,8 +93,8 @@ public class ProductMgmt {
                 String newDesc = scan.next();
                 for(Product prod:products){
                     if(prod.code==code){
-                        prod.desc=newDesc;
-                        System.out.println("Product Updated");
+                        prod.setDesc(newDesc);
+                        System.out.println(" ******* Product Updated *******");
                         getInformation(prod);
                         return;
                     }
@@ -91,8 +106,8 @@ public class ProductMgmt {
                 String newManu = scan.next();
                 for(Product prod:products){
                     if(prod.code==code){
-                        prod.manufacturer=newManu;
-                        System.out.println("Product Updated");
+                        prod.setManufacturer(newManu);
+                        System.out.println(" ******* Product Updated *******");
                         getInformation(prod);
                         return;
                     }
@@ -104,8 +119,8 @@ public class ProductMgmt {
                 float newPrice = scan.nextFloat();
                 for(Product prod:products){
                     if(prod.code==code){
-                        prod.price=newPrice;
-                        System.out.println("Product Updated");
+                        prod.setPrice(newPrice);
+                        System.out.println(" ******* Product Updated *******");
                         getInformation(prod);
                         return;
                     }
